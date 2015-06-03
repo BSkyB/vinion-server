@@ -8,7 +8,6 @@ var extractAudio = function(videoPath) {
     var outAudioFile = "out/" + parsedVideoPath.name + ".wav";
 
     fs.unlink(outAudioFile, function (err) {
-        if (err) throw err;
     });
 
     var command = 'ffmpeg -i ' + videoPath + ' -ar 16000 -ac 1 ' + outAudioFile;
