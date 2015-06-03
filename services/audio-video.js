@@ -1,6 +1,7 @@
 var exec = require('child_process').exec;
 var path = require('path');
 var fs = require('fs');
+var speech_recognition = require("../services/speech-recognition");
 
 var extractAudio = function(videoPath) {
     var parsedVideoPath = path.parse(videoPath);
@@ -12,7 +13,7 @@ var extractAudio = function(videoPath) {
 
     var command = 'ffmpeg -i ' + videoPath + ' -ar 16000 -ac 1 ' + outAudioFile;
     exec(command, function (error, stdout, stderr) {
-        console.log("stdout: " + stdout);
+        speech_recognition.extractText(outAudioFile);
     });
 };
 
