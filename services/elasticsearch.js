@@ -39,7 +39,7 @@ var indexVideo = function(filePath, data) {
     var autoText = processResult(data);
     console.log("file: " + filePath + " is indexed");
     var finalFilePath = path.parse(filePath);
-    var url = "http://hosain.fwd.wf/videos/" + finalFilePath.base;
+    var url = "http://localhost:3000/videos/" + finalFilePath.base;
     client.index({
         index: 'videos',
         type: 'video',
