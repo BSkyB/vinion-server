@@ -39,7 +39,7 @@ var indexVideo = function(filePath, data) {
     var autoText = processResult(data);
     console.log("file: " + filePath + " is indexed");
     var finalFilePath = path.parse(filePath);
-    var url = "http://localhost:4000/videos/" + finalFilePath.base;
+    var url = "http://192.168.12.117:4000/videos/" + finalFilePath.base;
     client.index({
         index: 'videos',
         type: 'video',
