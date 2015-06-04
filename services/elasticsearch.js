@@ -1,7 +1,7 @@
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
     host: 'localhost:9200',
-    log: 'trace'
+    log: 'error'
 });
 
 client.ping({
@@ -35,6 +35,7 @@ var processResult = function(stdout) {
 
 var indexVideo = function(url, data) {
     var autoText = processResult(data);
+    console.log("file: " + url + " is indexed");
     client.index({
         index: 'videos',
         type: 'video',
@@ -44,7 +45,9 @@ var indexVideo = function(url, data) {
             keywords: autoText
         }
     }, function (error, response) {
-        console.log(error);
+        if(error){
+            console.log(error);
+        }
     });
 };
 
