@@ -16,6 +16,7 @@ router.get('/search', function(req, res, next) {
             // Data reception is done, do whatever with it!
             var parsed = JSON.parse(body);
             res.setHeader('content-type', 'text/javascript');
+            res.header("Access-Control-Allow-Origin", "*");
             res.send(body);
         });
 
