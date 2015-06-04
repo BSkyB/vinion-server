@@ -17,14 +17,31 @@ client.ping({
         console.log('All is well');
     }
 });
+var processResult = function(stdout) {
+    var lines = stdout.toString().split('\n');
+    var results = [];
+    var i = 0;
+    lines.forEach(function(line) {
+        var times = line.split(" ");
+        var keyword = times[0];
+        times.shift();
+        var data = {};
+        data[keyword] = times;
+        results[i] = data;
+        i++;
+    });
+    return results;
+};
 
 var indexVideo = function(url, data) {
+    var autoText = processResult(data);
     client.index({
         index: 'videos',
         type: 'video',
         body: {
             url: url,
-            autoText: data,
+            fullText: data,
+            keywords: autoText
         }
     }, function (error, response) {
         console.log(error);

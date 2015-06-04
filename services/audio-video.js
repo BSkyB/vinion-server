@@ -13,8 +13,8 @@ var extractAudio = function(videoPath) {
 
     var command = 'ffmpeg -i ' + videoPath + ' -ar 16000 -ac 1 ' + outAudioFile;
     exec(command, function (error, stdout, stderr) {
-        fs.rename(videoPath, outVideoFile);
-        speech_recognition.extractText(outAudioFile);
+        //fs.rename(videoPath, outVideoFile);
+        speech_recognition.extractText(outAudioFile, outVideoFile);
     });
 };
 
