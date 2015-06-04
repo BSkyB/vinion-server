@@ -1,4 +1,6 @@
 var elasticsearch = require('elasticsearch');
+var path = require('path');
+
 var client = new elasticsearch.Client({
     host: 'localhost:9200',
     log: 'error'
@@ -33,9 +35,11 @@ var processResult = function(stdout) {
     return results;
 };
 
-var indexVideo = function(url, data) {
+var indexVideo = function(filePath, data) {
     var autoText = processResult(data);
-    console.log("file: " + url + " is indexed");
+    console.log("file: " + filePath + " is indexed");
+    var finalFilePath = path.parse(filePath);
+    var url = "http://localhost:3000/videos/" + finalFilePath.base;
     client.index({
         index: 'videos',
         type: 'video',

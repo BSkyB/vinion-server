@@ -7,13 +7,13 @@ var extractAudio = function(videoPath) {
     var parsedVideoPath = path.parse(videoPath);
     var outAudioFile = "out/" + parsedVideoPath.name + ".wav";
 
-    var outVideoFile = "out/" + parsedVideoPath.name + ".mp4";
+    var outVideoFile = "public/videos/" + parsedVideoPath.name + ".mp4";
     fs.unlink(outAudioFile, function (err) {
     });
 
     var command = 'ffmpeg -i ' + videoPath + ' -ar 16000 -ac 1 ' + outAudioFile;
     exec(command, function (error, stdout, stderr) {
-        //fs.rename(videoPath, outVideoFile);
+        fs.rename(videoPath, outVideoFile);
         speech_recognition.extractText(outAudioFile, outVideoFile);
     });
 };
